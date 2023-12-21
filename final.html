@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File Analysis Solution</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+
+        header {
+            background-color: purple;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        p {
+            color: #666;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        select, input[type="file"], input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+<body>
+    <header>
+        <!-- You can place your logo image here -->
+        <img src="your_logo.png" alt="Your Logo" width="200">
+        <h1>Welcome to Our File Analysis Solution</h1>
+    </header>
+    <div class="container">
+        <p>
+            Unveiling our innovative file analysis solution, meticulously crafted to revolutionize how you handle multimedia files. Its core mission: to optimize bandwidth utilization during large file transfers. Whether you prioritize speed or compression rates, our tool not only guides you but empowers you with data-backed recommendations, ensuring you use your bandwidth efficiently. With this tool, you'll not only save time and resources but also enhance the overall quality of your data transmissions. It's the key to a more streamlined and cost-effective digital experience. Welcome to the future of data optimization.
+        </p>
+        
+        <h2>Upload Your File</h2>
+        <form action="results.html" method="post" enctype="multipart/form-data">
+            <label for="fileType">Select the type of data:</label>
+            <select name="fileType" id="fileType">
+                <option value="text">Text</option>
+                <option value="audio">Audio</option>
+                <option value="image">Image</option>
+            </select><br><br>
+            <label for="fileToUpload">Choose a file:</label>
+            <input type="file" name="fileToUpload" id="fileToUpload"><br><br>
+
+            <
+
+            <!-- Add checkboxes for preferences -->
+            <label>Preferences:</label><br>
+            <input type="checkbox" name="bandwidthUtility" id="bandwidthUtility" value="bandwidth"> Bandwidth Utility<br>
+            <input type="checkbox" name="compressionRate" id="compressionRate" value="compression"> Compression Rate<br><br>
+
+            <input type="submit" value="Upload" name="submit" >
+        </form>
+
+        <!-- JavaScript for form submission and redirection -->
+        <script>
+            document.querySelector("form").addEventListener("submit", function (e) {
+                e.preventDefault();
+                const fileType = document.querySelector("#fileType").value;
+                const file = document.querySelector("#fileToUpload").files[0];
+                const logo = document.querySelector("#logoUpload").files[0];
+                const bandwidthUtility = document.querySelector("#bandwidthUtility").checked;
+                const compressionRate = document.querySelector("#compressionRate").checked;
+
+                if (file && logo) {
+                    // Send data to the server for processing (replace "process.php" with your server-side script)
+                    // You can also send preferences (bandwidthUtility and compressionRate) to the server.
+                    // Example using JavaScript's Fetch API:
+                    fetch("process.php", {
+                        method: "POST",
+                        body: new FormData(document.querySelector("form")),
+                    })
+                    .then(response => {
+                        // Handle the server response as needed
+                        // For this example, we'll redirect to the results page.
+                        if (response.ok) {
+                            window.location.href = "results.html";
+                        } else {
+                            alert("Error processing the data. Please try again.");
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                        alert("An error occurred. Please try again later.");
+                    });
+                } else {
+                    alert("Please select both a file and a logo to upload.");
+                }
+            });
+        </script>
+    </div>
+</body>
+</html>
